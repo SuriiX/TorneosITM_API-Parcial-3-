@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DBExamenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdministradorITM">
+          <Key>
+            <PropertyRef Name="idAministradorITM" />
+          </Key>
+          <Property Name="idAministradorITM" Type="int" Nullable="false" />
+          <Property Name="Documento" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NombreCompleto" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Torneos">
+          <Key>
+            <PropertyRef Name="idTorneos" />
+          </Key>
+          <Property Name="idTorneos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idAdministradorITM" Type="int" Nullable="false" />
+          <Property Name="TipoTorneo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NombreTorneo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="NombreEquipo" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ValorInscripcion" Type="int" Nullable="false" />
+          <Property Name="FechaTorneo" Type="date" Nullable="false" />
+          <Property Name="Integrantes" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Torneos_AdministradorITM">
+          <End Role="AdministradorITM" Type="Self.AdministradorITM" Multiplicity="1" />
+          <End Role="Torneos" Type="Self.Torneos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdministradorITM">
+              <PropertyRef Name="idAministradorITM" />
+            </Principal>
+            <Dependent Role="Torneos">
+              <PropertyRef Name="idAdministradorITM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBExamenModelStoreContainer">
+          <EntitySet Name="AdministradorITM" EntityType="Self.AdministradorITM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Torneos" EntityType="Self.Torneos" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Torneos_AdministradorITM" Association="Self.FK_Torneos_AdministradorITM">
+            <End Role="AdministradorITM" EntitySet="AdministradorITM" />
+            <End Role="Torneos" EntitySet="Torneos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBExamenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdministradorITM">
+          <Key>
+            <PropertyRef Name="idAministradorITM" />
+          </Key>
+          <Property Name="idAministradorITM" Type="Int32" Nullable="false" />
+          <Property Name="Documento" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Torneos" Relationship="Self.FK_Torneos_AdministradorITM" FromRole="AdministradorITM" ToRole="Torneos" />
+        </EntityType>
+        <EntityType Name="Torneo">
+          <Key>
+            <PropertyRef Name="idTorneos" />
+          </Key>
+          <Property Name="idTorneos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idAdministradorITM" Type="Int32" Nullable="false" />
+          <Property Name="TipoTorneo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreTorneo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NombreEquipo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ValorInscripcion" Type="Int32" Nullable="false" />
+          <Property Name="FechaTorneo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Integrantes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AdministradorITM" Relationship="Self.FK_Torneos_AdministradorITM" FromRole="Torneos" ToRole="AdministradorITM" />
+        </EntityType>
+        <Association Name="FK_Torneos_AdministradorITM">
+          <End Role="AdministradorITM" Type="Self.AdministradorITM" Multiplicity="1" />
+          <End Role="Torneos" Type="Self.Torneo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AdministradorITM">
+              <PropertyRef Name="idAministradorITM" />
+            </Principal>
+            <Dependent Role="Torneos">
+              <PropertyRef Name="idAdministradorITM" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBExamenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdministradorITMs" EntityType="Self.AdministradorITM" />
+          <EntitySet Name="Torneos" EntityType="Self.Torneo" />
+          <AssociationSet Name="FK_Torneos_AdministradorITM" Association="Self.FK_Torneos_AdministradorITM">
+            <End Role="AdministradorITM" EntitySet="AdministradorITMs" />
+            <End Role="Torneos" EntitySet="Torneos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBExamenModelStoreContainer" CdmEntityContainer="DBExamenEntities">
+          <EntitySetMapping Name="AdministradorITMs">
+            <EntityTypeMapping TypeName="DBExamenModel.AdministradorITM">
+              <MappingFragment StoreEntitySet="AdministradorITM">
+                <ScalarProperty Name="idAministradorITM" ColumnName="idAministradorITM" />
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Torneos">
+            <EntityTypeMapping TypeName="DBExamenModel.Torneo">
+              <MappingFragment StoreEntitySet="Torneos">
+                <ScalarProperty Name="idTorneos" ColumnName="idTorneos" />
+                <ScalarProperty Name="idAdministradorITM" ColumnName="idAdministradorITM" />
+                <ScalarProperty Name="TipoTorneo" ColumnName="TipoTorneo" />
+                <ScalarProperty Name="NombreTorneo" ColumnName="NombreTorneo" />
+                <ScalarProperty Name="NombreEquipo" ColumnName="NombreEquipo" />
+                <ScalarProperty Name="ValorInscripcion" ColumnName="ValorInscripcion" />
+                <ScalarProperty Name="FechaTorneo" ColumnName="FechaTorneo" />
+                <ScalarProperty Name="Integrantes" ColumnName="Integrantes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
