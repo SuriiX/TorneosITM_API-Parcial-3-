@@ -240,9 +240,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Clases\clsLogin.cs" />
+    <Compile Include="Clases\clsTorneo.cs" />
+    <Compile Include="Clases\Startup.cs" />
     <Compile Include="Clases\TokenGenerator.cs" />
+    <Compile Include="Clases\TokenValidationHandler.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\TorneosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
