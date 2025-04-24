@@ -1,19 +1,17 @@
 ﻿using System.Web.Http;
-using TorneosITM_API.Clases; 
+using TorneosITM_API.Clases; // Namespace correcto para TokenValidationHandler
 
-namespace TorneosITM_API 
+namespace TorneosITM_API
 {
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
-            // Configuración y servicios de API web
+            config.MapHttpAttributeRoutes();
 
-            // Rutas de API web
-            config.MapHttpAttributeRoutes(); 
-
-          
+            // --- ACTIVAR EL HANDLER DE VALIDACIÓN ---
             config.MessageHandlers.Add(new TokenValidationHandler());
+            // ----------------------------------------
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -21,7 +19,7 @@ namespace TorneosITM_API
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            var formatters = GlobalConfiguration.Configuration.Formatters;
+            var formatters = config.Formatters;
             formatters.Remove(formatters.XmlFormatter);
         }
     }

@@ -1,0 +1,28 @@
+2025-04-23 19:51:04.185 - --- Nueva Solicitud GET a / ---
+2025-04-23 19:51:04.211 - ShouldBypass Check iniciado para: /
+2025-04-23 19:51:04.212 - -> NO coincide con LoginPath (/api/Login/Ingresar).
+2025-04-23 19:51:04.213 - -> ActionDescriptor obtenido.
+2025-04-23 19:51:04.213 - -> No se pudo obtener ActionDescriptor (Error: Ninguno). Asumiendo que requiere validación.
+2025-04-23 19:51:04.214 - Bypass validación FALSE para /. Intentando obtener token.
+2025-04-23 19:51:04.214 - -> Token no encontrado o formato inválido. Devolviendo Unauthorized.
+2025-04-23 19:51:08.745 - --- Nueva Solicitud POST a /api/Login/Verificar ---
+2025-04-23 19:51:08.745 - ShouldBypass Check iniciado para: /api/Login/Verificar
+2025-04-23 19:51:08.745 - -> NO coincide con LoginPath (/api/Login/Ingresar).
+2025-04-23 19:51:08.745 - -> ActionDescriptor obtenido.
+2025-04-23 19:51:08.745 - -> No se pudo obtener ActionDescriptor (Error: Ninguno). Asumiendo que requiere validación.
+2025-04-23 19:51:08.746 - Bypass validación FALSE para /api/Login/Verificar. Intentando obtener token.
+2025-04-23 19:51:08.746 - -> Token no encontrado o formato inválido. Devolviendo Unauthorized.
+2025-04-23 19:52:15.579 - --- Nueva Solicitud POST a /api/Login/Verificar ---
+2025-04-23 19:52:15.579 - ShouldBypass Check iniciado para: /api/Login/Verificar
+2025-04-23 19:52:15.579 - -> NO coincide con LoginPath (/api/Login/Ingresar).
+2025-04-23 19:52:15.579 - -> ActionDescriptor obtenido.
+2025-04-23 19:52:15.580 - -> No se pudo obtener ActionDescriptor (Error: Ninguno). Asumiendo que requiere validación.
+2025-04-23 19:52:15.580 - Bypass validación FALSE para /api/Login/Verificar. Intentando obtener token.
+2025-04-23 19:52:15.581 - -> Token no encontrado o formato inválido. Devolviendo Unauthorized.
+2025-04-23 19:53:17.013 - --- Nueva Solicitud GET a / ---
+2025-04-23 19:53:17.017 - ShouldBypass Check iniciado para: /
+2025-04-23 19:53:17.017 - -> NO coincide con LoginPath (/api/Login/Ingresar).
+2025-04-23 19:53:17.018 - -> ActionDescriptor obtenido.
+2025-04-23 19:53:17.019 - -> No se pudo obtener ActionDescriptor (Error: Ninguno). Asumiendo que requiere validación.
+2025-04-23 19:53:17.019 - Bypass validación FALSE para /. Intentando obtener token.
+2025-04-23 19:53:17.019 - -> Token no encontrado o formato inválido. Devolviendo Unauthorized.

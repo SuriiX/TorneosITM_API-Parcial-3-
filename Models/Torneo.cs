@@ -11,7 +11,7 @@ namespace TorneosITM_API.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Torneo
     {
         public int idTorneos { get; set; }
@@ -22,7 +22,7 @@ namespace TorneosITM_API.Models
         public int ValorInscripcion { get; set; }
         public System.DateTime FechaTorneo { get; set; }
         public string Integrantes { get; set; }
-    
+
         public virtual AdministradorITM AdministradorITM { get; set; }
     }
 }

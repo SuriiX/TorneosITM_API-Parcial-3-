@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Linq;
-using TorneosITM_API.Models; 
+using TorneosITM_API.Models; // Namespace correcto
 
-namespace TorneosITM_API.Clases
+namespace TorneosITM_API.Clases // Namespace correcto
 {
     public class clsLogin
     {
-        public LoginModel login { get; set; }
+        // Propiedad para recibir los datos del controlador
+        public LoginModel login { get; set; } // Usa el LoginModel original
 
-        // Método principal que realiza la validación y genera el token
-        public LoginResponse Ingresar()
+        // Método original que valida contra DBExamenEntities
+        public LoginResponse Ingresar() // Usa el LoginResponse original
         {
             var respuesta = new LoginResponse();
             try
             {
+                // Validaciones básicas de entrada
                 if (this.login == null || string.IsNullOrEmpty(this.login.Usuario) || string.IsNullOrEmpty(this.login.Clave))
                 {
                     respuesta.Mensaje = "Debe proporcionar Usuario y Clave.";
@@ -21,14 +23,13 @@ namespace TorneosITM_API.Clases
                     return respuesta;
                 }
 
-                // Creamos el contexto de la base de datos dentro de un using para asegurar su disposición
+                // Usa el DbContext correcto
                 using (DBExamenEntities db = new DBExamenEntities())
                 {
-                    // 1. Buscamos al administrador por el nombre de usuario
+                    // Busca por usuario en AdministradorITM
                     var administrador = db.AdministradorITMs
                                           .FirstOrDefault(a => a.Usuario == this.login.Usuario);
 
-                    // 2. Verificamos si el administrador existe
                     if (administrador == null)
                     {
                         respuesta.Mensaje = "Usuario no encontrado.";
@@ -36,14 +37,13 @@ namespace TorneosITM_API.Clases
                     }
                     else
                     {
-                        // 3. Verificamos si la clave coincide (comparación directa en texto plano)
+                        // IMPORTANTE: Comparación directa de clave (sin hashing)
                         if (administrador.Clave == this.login.Clave)
                         {
-                            // ¡Autenticación exitosa!
-                            // 4. Generamos el token JWT
+                            // Autenticación exitosa
+                            // Llama al TokenGenerator original de este proyecto
                             string tokenGenerado = TokenGenerator.GenerateTokenJwt(administrador.Usuario);
 
-                            // 5. Preparamos la respuesta exitosa
                             respuesta.Autenticado = true;
                             respuesta.Usuario = administrador.Usuario;
                             respuesta.Token = tokenGenerado;
@@ -51,7 +51,6 @@ namespace TorneosITM_API.Clases
                         }
                         else
                         {
-                            // La clave no coincide
                             respuesta.Mensaje = "Clave incorrecta.";
                             respuesta.Autenticado = false;
                         }
@@ -60,15 +59,12 @@ namespace TorneosITM_API.Clases
             }
             catch (Exception ex)
             {
-                // Manejo de cualquier otro error inesperado
-                // En un caso real, sería bueno loggear el ex.ToString() para más detalles
+                // Loggear ex.ToString() sería útil
                 respuesta.Mensaje = "Error durante la autenticación: " + ex.Message;
                 respuesta.Autenticado = false;
-                // Asegurarse de que el token esté vacío en caso de error
                 respuesta.Token = string.Empty;
                 respuesta.Usuario = string.Empty;
             }
-            // Devolvemos el objeto de respuesta (éxito o fallo)
             return respuesta;
         }
     }
